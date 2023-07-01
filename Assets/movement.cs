@@ -16,9 +16,11 @@ public class movement : MonoBehaviour
 
 
     private Rigidbody rb;
+    private Transform camTransform;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        camTransform = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -30,8 +32,28 @@ public class movement : MonoBehaviour
         // Left and Right, Forward and Backward Movement , x and z Axis...
         if (rb.velocity.magnitude < maxSpeed)
         {
-            rb.velocity += new Vector3(vi, 0, -hi) * acceleration * Time.deltaTime;
+            // rb.velocity += new Vector3(vi, 0, -hi) * acceleration * Time.deltaTime;
+            //rb.velocity += new Vector3(
+            //    vi * camTransform.forward.x,
+            //    0,
+            //    -hi * camTransform.right.x
+            //    ) * acceleration * Time.deltaTime;
 
+            // forward is a direction vector ....
+
+            rb.velocity += camTransform.forward * vi * acceleration * Time.deltaTime;
+            rb.velocity += camTransform.right * hi * acceleration * Time.deltaTime;
+
+
+            // I need to specify some range for the `forward` and `right` vectors...
+            // coz right now the velocity can be applied towards the ground or to the sky...
+            // Maybe have a Vector of Directions that can be moved in.. and
+            // set the current direction in the Update Method based on the most fitting / Matching
+            // direction of the current camTransform...
+
+            Debug.Log("cam forward");
+            Debug.Log(camTransform.forward);
+            Debug.Log(rb.velocity);
 
             // Top and Bottom (y axis)
             if (Input.GetKeyDown(KeyCode.Q))

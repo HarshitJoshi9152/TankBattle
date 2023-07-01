@@ -26,14 +26,14 @@ public class followPlayer : MonoBehaviour
         float mx = Input.GetAxis("Mouse X");
         float my = Input.GetAxis("Mouse Y");
         // Update yaw and pitch angles
-        // yaw += mx;
-        // pitch -= my;
-        // pitch = Mathf.Clamp(pitch, -90f, 90f);
+        yaw += mx;
+        pitch -= my;
+        pitch = Mathf.Clamp(pitch, -90f, 90f);
 
         // Rotate the camera based on yaw and pitch
-        // transform.eulerAngles = new Vector3(pitch, yaw, 0f);
-        transform.RotateAround(objectToFollow.transform.position, Vector3.up, mx * mouseSenstivity);
-        transform.RotateAround(objectToFollow.transform.position, Vector3.forward, my * mouseSenstivity);
+        transform.eulerAngles = new Vector3(pitch, yaw, 0f);
+        // transform.RotateAround(objectToFollow.transform.position, Vector3.up, mx * mouseSenstivity);
+        // transform.RotateAround(objectToFollow.transform.position, Vector3.forward, my * mouseSenstivity);
 
 
         
@@ -42,7 +42,7 @@ public class followPlayer : MonoBehaviour
 
         // THE TRICK IS TO ... NOT CHANGE THE Z AND Y AXIS POS VALUES..
         transform.position = objectToFollow.transform.position + transform.forward  * offset.x;
-
+        // TODO: RENAME OFFSET TO CAMDISTANCE
 
 
 
