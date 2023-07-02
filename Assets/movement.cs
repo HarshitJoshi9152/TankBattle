@@ -51,10 +51,6 @@ public class movement : MonoBehaviour
             // set the current direction in the Update Method based on the most fitting / Matching
             // direction of the current camTransform...
 
-            Debug.Log("cam forward");
-            Debug.Log(camTransform.forward);
-            Debug.Log(rb.velocity);
-
             // Top and Bottom (y axis)
             if (Input.GetKeyDown(KeyCode.Q))
             {
