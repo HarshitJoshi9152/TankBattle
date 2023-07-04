@@ -7,7 +7,7 @@ public class followPlayer : MonoBehaviour
     // Start is called before the first frame update
     [Header("Follow Settings")]
     public GameObject objectToFollow;
-    public Vector3 offset;
+    public float CamDist;
 
     public float mouseSenstivity;
 
@@ -32,8 +32,19 @@ public class followPlayer : MonoBehaviour
 
         // Rotate the camera based on yaw and pitch
         transform.eulerAngles = new Vector3(pitch, yaw, 0f);
-        // transform.RotateAround(objectToFollow.transform.position, Vector3.up, mx * mouseSenstivity);
-        // transform.RotateAround(objectToFollow.transform.position, Vector3.forward, my * mouseSenstivity);
+
+        // transform.RotateAround(objectToFollow.transform.position, transform.up, mx * mouseSenstivity);
+        // transform.RotateAround(objectToFollow.transform.position, transform.right, my * mouseSenstivity);
+
+        // Quaternion rotation = Quaternion.Euler(my * mouseSenstivity, mx * mouseSenstivity, 0f);
+        // transform.rotation *= rotation;
+
+        // transform.eulerAngles = new Vector3(
+        //     transform.eulerAngles.x,
+        //     transform.eulerAngles.y,
+        //     0
+        // );
+            
 
 
         
@@ -41,9 +52,8 @@ public class followPlayer : MonoBehaviour
 
 
         // THE TRICK IS TO ... NOT CHANGE THE Z AND Y AXIS POS VALUES..
-        transform.position = objectToFollow.transform.position + transform.forward  * offset.x;
-        // TODO: RENAME OFFSET TO CAMDISTANCE
-
+        transform.position = objectToFollow.transform.position + transform.forward  * -CamDist;
+        // TODO: RENAME OFFSET TO CAM_DISTANCE
 
 
         // NEW CODE ??
