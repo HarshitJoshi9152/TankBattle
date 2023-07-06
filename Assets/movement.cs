@@ -17,10 +17,13 @@ public class movement : MonoBehaviour
 
     private Rigidbody rb;
     private Transform camTransform;
+
+    private ShootingScript _shootingScript;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         camTransform = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Transform>();
+        _shootingScript = GetComponent<ShootingScript>();
     }
 
     // Update is called once per frame
@@ -28,6 +31,14 @@ public class movement : MonoBehaviour
     {
         float hi = Input.GetAxis("Horizontal");
         float vi = Input.GetAxis("Vertical");
+
+        // Missile Shooting
+        if (Input.GetMouseButtonDown(0))
+        {
+            _shootingScript.shoot(new Vector3(0, 0, 10));
+        }
+        
+
 
         // Left and Right, Forward and Backward Movement , x and z Axis...
         if (rb.velocity.magnitude < maxSpeed)
